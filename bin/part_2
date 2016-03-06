@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "banking"
+
+jim_account = Banking::Account.new(30_000)
+emma_account = Banking::Account.new(100)
+
+cajasur_bank = Banking::Bank.new
+santander_bank = Banking::Bank.new
+
+cajasur_bank.add_account(jim_account)
+cajasur_bank.add_account(Banking::Account.new(20))
+
+santander_bank.add_account(emma_account)
+santander_bank.add_account(Banking::Account.new(38))
+
+transfer = Banking::Transfer.new(jim_account, emma_account, 20_000)
+
+puts "Before send the transfer, Jim has a balance of #{jim_account.balance}"
+puts "Before received the transfer, Emma has a balance of #{emma_account.balance}"
+
+agent = Banking::TransferAgent.new(cajasur_bank, transfer)
+agent.execute_transfer
+
+puts "Emma has received a transfer of #{transfer.amount} and now has a balance of #{emma_account.balance}"
+puts "Afer send the transfer, Jim has a balance of #{jim_account.balance} (including transfer commissions)"

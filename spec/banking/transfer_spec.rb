@@ -21,4 +21,28 @@ describe Banking::Transfer do
 
     expect(transfer.amount).to eq amount
   end
+
+  it 'should execute the transfer' do
+    source_account_initial_balance = 32.0
+    source_account = Banking::Account.new(source_account_initial_balance)
+
+    destination_account_initial_balance = 42.0
+    destination_account = Banking::Account.new(destination_account_initial_balance)
+
+    transfer_amount = 120.32
+    transfer = described_class.new(source_account, destination_account, transfer_amount)
+
+    commission = 12.20
+    transfer.execute(commission: commission)
+
+    expect(transfer.source_account.balance).to eq(
+      source_account_initial_balance -
+      transfer_amount -
+      commission
+    )
+
+    expect(transfer.destination_account.balance).to eq(
+      destination_account_initial_balance + transfer_amount
+    )
+  end
 end

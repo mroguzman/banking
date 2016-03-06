@@ -16,15 +16,12 @@ module Banking
 
     def execute_transfer(transfer)
       if intra_bank_transfer? transfer
-        transfer.source_account.execute_transaction(-transfer.amount)
-        transfer.destination_account.execute_transaction(transfer.amount)
+        transfer.execute
       elsif inter_bank_transfer? transfer
         raise InterBankLimitException if transfer.amount > INTER_BANK_TRANSFER_LIMIT
         raise InterBankTranferException if rand(1..100) <= INTER_BANK_CHANCE_OF_FAILURE
 
-        transfer.source_account.execute_transaction(-transfer.amount)
-        transfer.source_account.execute_transaction(-INTER_BANK_TRANSFER_COMMISSION)
-        transfer.destination_account.execute_transaction(transfer.amount)
+        transfer.execute(commission: INTER_BANK_TRANSFER_COMMISSION)
       else
         raise NotValidTransferException
       end

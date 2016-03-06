@@ -1,5 +1,4 @@
 require "banking/version"
-
-module Banking
-  # Your code goes here...
-end
+require "banking/account"
+require "banking/transfer"
+require "banking/bank"

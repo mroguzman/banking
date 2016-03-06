@@ -6,6 +6,8 @@ Welcome to my Banking gem!
 
 Before execute any of the code inside this repo, please do run `bin/setup` to install dependencies.
 
+This gem has been tested with Ruby version `2.3.0` so please use this version to execute this code.
+
 ## How to run tests
 
 ```sh

@@ -25,3 +25,8 @@ agent.execute_transfer
 
 puts "Emma has received a transfer of #{transfer.amount} and now has a balance of #{emma_account.balance}"
 puts "Afer send the transfer, Jim has a balance of #{jim_account.balance} (including transfer commissions)"
+
+puts "The transfers history of Cajasur Bank is:"
+cajasur_bank.transfers_history.each do |transfer|
+  puts "  - #{transfer}"
+end

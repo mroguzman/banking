@@ -18,6 +18,23 @@ describe Banking::Bank do
     end.to raise_error described_class::NotValidTransferException
   end
 
+  it 'should keep a list of all transfers' do
+    stub_const("#{described_class}::INTER_BANK_CHANCE_OF_FAILURE", 0)
+
+    transfer_one = Banking::Transfer.new(Banking::Account.new, Banking::Account.new, 1000)
+    transfer_two = Banking::Transfer.new(Banking::Account.new, Banking::Account.new, 109)
+
+    bank = described_class.new
+
+    bank.add_account(transfer_one.source_account)
+    bank.add_account(transfer_two.source_account)
+
+    bank.execute_transfer(transfer_one)
+    bank.execute_transfer(transfer_two)
+
+    expect(bank.transfers_history).to eq [transfer_one, transfer_two]
+  end
+
   context 'Intra-bank transfers' do
     it 'should execute intra-bank transfers' do
       source_account_initial_balance = 100

@@ -8,10 +8,11 @@ module Banking
     class InterBankTranferException < StandardError; end
     class NotValidTransferException < StandardError; end
 
-    attr_reader :accounts
+    attr_reader :accounts, :transfers_history
 
     def initialize
       @accounts = []
+      @transfers_history = []
     end
 
     def execute_transfer(transfer)
@@ -25,6 +26,8 @@ module Banking
       else
         raise NotValidTransferException
       end
+      
+      add_transfer_to_history(transfer)
     end
 
     def add_account(account)
@@ -32,6 +35,10 @@ module Banking
     end
 
     private
+
+    def add_transfer_to_history(transfer)
+      @transfers_history << transfer
+    end
 
     def intra_bank_transfer?(transfer)
       @accounts.include?(transfer.source_account) &&

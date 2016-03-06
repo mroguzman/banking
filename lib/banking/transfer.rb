@@ -13,5 +13,9 @@ module Banking
       source_account.execute_transaction(-commission)
       destination_account.execute_transaction(amount)
     end
+
+    def to_s
+      "Transfer of #{amount}"
+    end
   end
 end

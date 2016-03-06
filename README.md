@@ -1,36 +1,34 @@
 # Banking
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/banking`. To experiment with that code, run `bin/console` for an interactive prompt.
+Welcome to my Banking gem!
 
-TODO: Delete this and the text above, and describe your gem
+## Setup
 
-## Installation
+Before execute any of the code inside this repo, please do run `bin/setup` to install dependencies.
 
-Add this line to your application's Gemfile:
+## How to run tests
 
-```ruby
-gem 'banking'
+```sh
+bundle exec rspec
 ```
 
-And then execute:
+## How to run part_2 exercise
 
-    $ bundle
+```sh
+bundle exec bin/part_2
+```
 
-Or install it yourself as:
+## Questions
 
-    $ gem install banking
+### How would you improve your solution?
 
-## Usage
+- I think that my solution could be improved including a way to reference the bank from the account.
+- Another good improvement would be to allow that class `Banking::TransferAgent` can execute different transfers (without the need to create different instances).
 
-TODO: Write usage instructions here
+### How would you adapt your solution if transfers are not instantaneous?
 
-## Development
+I think into some solution with callbacks.
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+----
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/banking.
-
+Author: Rocío Guzmán Pérez
